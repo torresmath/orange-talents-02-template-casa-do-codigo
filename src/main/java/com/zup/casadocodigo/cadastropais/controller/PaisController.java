@@ -1,5 +1,6 @@
 package com.zup.casadocodigo.cadastropais.controller;
 
+import com.zup.casadocodigo.cadastropais.controller.dto.PaisDto;
 import com.zup.casadocodigo.cadastropais.controller.form.NovoPaisForm;
 import com.zup.casadocodigo.cadastropais.modelo.Pais;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,11 +22,11 @@ public class PaisController {
 
     @PostMapping
     @Transactional
-    public String cria(@RequestBody @Valid NovoPaisForm paisForm) {
+    public PaisDto cria(@RequestBody @Valid NovoPaisForm paisForm) {
 
         Pais pais = paisForm.toModel();
         manager.persist(pais);
 
-        return pais.toString();
+        return new PaisDto(pais);
     }
 }

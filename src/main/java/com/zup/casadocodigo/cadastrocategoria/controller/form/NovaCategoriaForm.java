@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 
 public class NovaCategoriaForm {
 
-    @NotNull(message = "{not_null}")
-    @NotBlank(message = "{not_blank}")
+    @NotNull(message = "{_not_null}}")
+    @NotBlank(message = "{___not_blank}")
     @UniqueValue(domainClass = Categoria.class, fieldName = "nome", message = "{categoria.duplicated_nome}")
     private String nome;
 

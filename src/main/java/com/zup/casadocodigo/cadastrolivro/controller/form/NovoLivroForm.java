@@ -16,18 +16,16 @@ import java.time.LocalDate;
 
 public class NovoLivroForm {
 
-    @NotNull(message = "{not_null}")
-    @NotBlank(message = "{not_blank}")
+    @NotNull(message = "{_not_null}}")
+    @NotBlank(message = "{_not_blank}")
     @UniqueValue(domainClass = Livro.class, fieldName = "titulo")
     private final String titulo;
 
-    @NotNull(message = "{not_null}")
-    @NotBlank(message = "{not_blank}")
+    @NotBlank(message = "{_not_blank}")
     @UniqueValue(domainClass = Livro.class, fieldName = "isbn", message = "{livro.duplicated_isbn}")
     private final String isbn;
 
-    @NotNull(message = "{not_null}")
-    @NotBlank(message = "{not_blank}")
+    @NotBlank(message = "{_not_blank}")
     @Size(max = 500)
     private final String resumo;
 
@@ -36,28 +34,28 @@ public class NovoLivroForm {
     @DecimalMin(value = "20", message = "{livro.preco_min}")
     private final BigDecimal preco;
 
-    @Min(100)
-    @NotNull
+    @Min(value = 100, message = "{livro.paginas_min}")
+    @NotNull(message = "{_not_null}}")
     private final Integer paginas;
 
-    @Future
+    @FutureOrPresent(message = "{livro.data_publicacao_future}")
     @JsonProperty("data_publicacao")
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private final LocalDate dataPublicacao;
 
     @JsonProperty("id_autor")
-    @NotNull(message = "{not_null}")
+    @NotNull(message = "{_not_null}}")
     @Positive
-    @ExistsId(domainClass = Autor.class, message = "{not_found_autor}")
+    @ExistsId(domainClass = Autor.class, message = "{autor.not_found}")
     private final Long idAutor;
 
     @JsonProperty("id_categoria")
-    @NotNull(message = "{not_null}")
+    @NotNull(message = "{_not_null}}")
     @Positive
-    @ExistsId(domainClass = Categoria.class, message = "{not_found_categoria}")
+    @ExistsId(domainClass = Categoria.class, message = "{categoria.not_found}")
     private final Long idCategoria;
 
-    public NovoLivroForm(@NotNull(message = "{not_null}") @NotBlank(message = "{not_blank}") String titulo, @NotNull(message = "{not_null}") @NotBlank(message = "{not_blank}") String isbn, @NotNull(message = "{not_null}") @NotBlank(message = "{not_blank}") @Size(max = 500) String resumo, String sumario, @DecimalMin(value = "20", message = "{livro.preco_min}") BigDecimal preco, @Min(100) @NotNull Integer paginas, @Future LocalDate dataPublicacao, @NotNull(message = "{not_null}") @Positive Long idAutor, @NotNull(message = "{not_null}") @Positive Long idCategoria) {
+    public NovoLivroForm(@NotNull(message = "{_not_null}}") @NotBlank(message = "{_not_blank}") String titulo, @NotNull(message = "{_not_null}}") @NotBlank(message = "{_not_blank}") String isbn, @NotNull(message = "{_not_null}}") @NotBlank(message = "{_not_blank}") @Size(max = 500) String resumo, String sumario, @DecimalMin(value = "20", message = "{livro.preco_min}") BigDecimal preco, @Min(100) @NotNull Integer paginas, @Future LocalDate dataPublicacao, @NotNull(message = "{_not_null}}") @Positive Long idAutor, @NotNull(message = "{_not_null}}") @Positive Long idCategoria) {
         this.titulo = titulo;
         this.isbn = isbn;
         this.resumo = resumo;

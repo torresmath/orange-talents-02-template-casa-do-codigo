@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueValue {
-    String message() default "{duplicated_field}";
+    String message() default "{_duplicated_field}";
     String fieldName();
     Class<?> domainClass();
     Class<?>[] groups() default {};

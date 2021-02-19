@@ -1,5 +1,6 @@
 package com.zup.casadocodigo.cadastroestado.controller;
 
+import com.zup.casadocodigo.cadastroestado.controller.dto.EstadoDto;
 import com.zup.casadocodigo.cadastroestado.controller.form.NovoEstadoForm;
 import com.zup.casadocodigo.cadastroestado.modelo.Estado;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,10 +22,10 @@ public class EstadoController {
 
     @PostMapping
     @Transactional
-    public String cria(@RequestBody @Valid NovoEstadoForm estadoForm) {
+    public EstadoDto cria(@RequestBody @Valid NovoEstadoForm estadoForm) {
 
         Estado estado = estadoForm.toModel(manager);
         manager.persist(estado);
-        return estado.toString();
+        return new EstadoDto(estado);
     }
 }

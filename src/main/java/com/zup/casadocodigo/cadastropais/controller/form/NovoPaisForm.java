@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 
 public class NovoPaisForm {
 
-    @NotNull(message = "{not_null}")
-    @NotBlank(message = "{not_blank}")
-    @UniqueValue(domainClass = Pais.class, fieldName = "nome", message = "Já existe um país com o nome fornecido")
+    @NotNull(message = "{_not_null}}")
+    @NotBlank(message = "{_not_blank}")
+    @UniqueValue(domainClass = Pais.class, fieldName = "nome", message = "{pais.unique_nome}")
     private String nome;
 
     public Pais toModel() {

@@ -10,18 +10,18 @@ import javax.validation.constraints.Size;
 
 public class NovoAutorForm {
 
-    @NotNull(message = "{not_null}")
-    @NotEmpty(message = "{not_blank}")
+    @NotNull(message = "{_not_null}}")
+    @NotEmpty(message = "{_not_blank}")
     private String nome;
 
-    @NotNull(message = "{not_null}")
-    @NotEmpty(message = "{not_blank}")
+    @NotNull(message = "{_not_null}}")
+    @NotEmpty(message = "{_not_blank}")
     @Email(message = "{autor.invalid_email}")
     @UniqueValue(domainClass = Autor.class, fieldName = "email", message = "{autor.duplicated_email}")
     private String email;
 
-    @NotNull(message = "{not_null}")
-    @NotEmpty(message = "{not_blank}")
+    @NotNull(message = "{_not_null}}")
+    @NotEmpty(message = "{_not_blank}")
     @Size(max = 400, message = "{autor.descricao_max}")
     private String descricao;
 
