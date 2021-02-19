@@ -1,32 +1,24 @@
 package com.zup.casadocodigo.cliente.modelo;
 
-import com.sun.istack.NotNull;
-import com.zup.casadocodigo.cliente.controller.form.DocumentSequenceProvider;
-import com.zup.casadocodigo.common.CnpjGroup;
-import com.zup.casadocodigo.common.CpfGroup;
-import com.zup.casadocodigo.common.Document;
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
-import org.hibernate.validator.group.GroupSequenceProvider;
+import com.zup.casadocodigo.common.CPForCNPJ;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cliente_documento")
-@GroupSequenceProvider(DocumentSequenceProvider.class)
-public class Documento implements Document {
+public class Documento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @CPF(groups = CpfGroup.class, message = "Precisa ser CPF")
-    @CNPJ(groups = CnpjGroup.class, message = "Precisa ser CNPJ")
     private DocumentoTipo tipo;
 
     @NotBlank
+    @CPForCNPJ
     private String documento;
 
     @NotNull
@@ -39,7 +31,6 @@ public class Documento implements Document {
         this.cliente = cliente;
     }
 
-    @Override
     public DocumentoTipo getTipo() {
         return tipo;
     }

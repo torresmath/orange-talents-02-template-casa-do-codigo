@@ -3,6 +3,7 @@ package com.zup.casadocodigo.cliente.controller.form;
 import com.zup.casadocodigo.cliente.modelo.Cliente;
 import com.zup.casadocodigo.cliente.modelo.Documento;
 import com.zup.casadocodigo.cliente.modelo.DocumentoTipo;
+import com.zup.casadocodigo.common.CPForCNPJ;
 import com.zup.casadocodigo.common.CnpjGroup;
 import com.zup.casadocodigo.common.CpfGroup;
 import com.zup.casadocodigo.common.Document;
@@ -15,8 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@GroupSequenceProvider(DocumentSequenceProvider.class)
-public class NovoDocumentoForm implements ClienteDetalhes<Documento>, Document {
+public class NovoDocumentoForm implements ClienteDetalhes<Documento> {
 
     // todo validar enum
     @NotNull(message = "{_not_null}")
@@ -24,8 +24,7 @@ public class NovoDocumentoForm implements ClienteDetalhes<Documento>, Document {
     private DocumentoTipo tipo;
     @NotBlank(message = "{_not_blank}")
 
-    @CPF(groups = CpfGroup.class)
-    @CNPJ(groups = CnpjGroup.class)
+    @CPForCNPJ
     private String documento;
 
     private Cliente cliente;
@@ -45,7 +44,6 @@ public class NovoDocumentoForm implements ClienteDetalhes<Documento>, Document {
     }
 
     @Override
-    @Valid
     public Documento mapCliente(Cliente cliente, EntityManager manager) {
         this.cliente = cliente;
         Documento documento = new Documento(tipo, this.documento, cliente);

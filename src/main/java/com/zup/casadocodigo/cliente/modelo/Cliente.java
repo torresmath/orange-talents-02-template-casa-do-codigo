@@ -27,4 +27,8 @@ public class Cliente {
         this.sobrenome = sobrenome;
         this.email = email;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

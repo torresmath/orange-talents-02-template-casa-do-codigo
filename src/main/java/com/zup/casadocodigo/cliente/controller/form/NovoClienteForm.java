@@ -55,11 +55,8 @@ public class NovoClienteForm {
         this.detalhes = Arrays.asList(endereco, telefone, documento);
     }
 
-    public Cliente toModel(EntityManager manager) {
-
-        Cliente cliente = new Cliente(nome, sobrenome, email);
-        detalhes.forEach(detalhe -> detalhe.mapCliente(cliente, manager));
-        return cliente;
+    public Cliente toModel() {
+        return new Cliente(nome, sobrenome, email);
     }
 
     public String getNome() {
@@ -84,5 +81,9 @@ public class NovoClienteForm {
 
     public NovoDocumentoForm getDocumento() {
         return documento;
+    }
+
+    public List<ClienteDetalhes> getDetalhes() {
+        return detalhes;
     }
 }
