@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 import com.zup.casadocodigo.estado.modelo.Estado;
 import com.zup.casadocodigo.pais.modelo.Pais;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -47,6 +48,8 @@ public class Endereco {
                     Estado estado,
                     Pais pais,
                     Cliente cliente) {
+
+        Assert.state(estado != null && estado.pertenceAPais(pais), "Estado não pertence ao país informado");
 
         this.endereco = endereco;
         this.complemento = complemento;
