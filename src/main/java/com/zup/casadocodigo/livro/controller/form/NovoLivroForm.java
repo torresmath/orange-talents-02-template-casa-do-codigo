@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zup.casadocodigo.autor.modelo.Autor;
 import com.zup.casadocodigo.categoria.modelo.Categoria;
 import com.zup.casadocodigo.livro.modelo.Livro;
-import com.zup.casadocodigo.common.ExistsId;
-import com.zup.casadocodigo.common.UniqueValue;
+import com.zup.casadocodigo.common.annotations.ExistsId;
+import com.zup.casadocodigo.common.annotations.UniqueValue;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;

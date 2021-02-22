@@ -1,4 +1,6 @@
-package com.zup.casadocodigo.common;
+package com.zup.casadocodigo.common.annotations;
+
+import com.zup.casadocodigo.common.validators.UniqueValuesValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

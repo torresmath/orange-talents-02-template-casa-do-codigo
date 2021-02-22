@@ -1,5 +1,6 @@
-package com.zup.casadocodigo.common;
+package com.zup.casadocodigo.common.validators;
 
+import com.zup.casadocodigo.common.annotations.UniqueValue;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -15,9 +16,14 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Ob
     private Class<?> klass;
     @PersistenceContext
     private EntityManager manager;
+    protected boolean enableRegex;
+    protected String regex;
 
     @Override
     public void initialize(UniqueValue params) {
+        enableRegex = params.enableRegex();
+        regex = params.regex();
+
         domainAttribute = params.fieldName();
         klass = params.domainClass();
     }
@@ -25,10 +31,14 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Ob
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext constraintValidatorContext) {
 
+        if (enableRegex && !regex.isBlank()) {
+            value = value.toString().replaceAll(regex, "");
+        }
+
         Query query = manager.createQuery("select 1 from " + klass.getName() + " where " + domainAttribute + "= :value");
         query.setParameter("value", value);
         List<?> list = query.getResultList();
-        Assert.state(list.size() <= 1, "Foi encontrado mais de um "+klass+" com o atributo "+ domainAttribute+ " = "+ value);
+        Assert.state(list.size() <= 1, "Foi encontrado mais de um " + klass + " com o atributo " + domainAttribute + " = " + value);
 
         return list.isEmpty();
     }

@@ -1,5 +1,6 @@
-package com.zup.casadocodigo.common;
+package com.zup.casadocodigo.common.validators;
 
+import com.zup.casadocodigo.common.annotations.ExistsId;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;

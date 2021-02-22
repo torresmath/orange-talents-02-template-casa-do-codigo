@@ -1,6 +1,6 @@
 package com.zup.casadocodigo.categoria.controller.form;
 
-import com.zup.casadocodigo.common.UniqueValue;
+import com.zup.casadocodigo.common.annotations.UniqueValue;
 import com.zup.casadocodigo.categoria.modelo.Categoria;
 
 import javax.validation.constraints.NotBlank;

@@ -5,11 +5,13 @@ import com.zup.casadocodigo.cliente.modelo.Cliente;
 import com.zup.casadocodigo.cliente.modelo.Endereco;
 import com.zup.casadocodigo.estado.modelo.Estado;
 import com.zup.casadocodigo.pais.modelo.Pais;
-import com.zup.casadocodigo.common.ExistsId;
+import com.zup.casadocodigo.common.annotations.ExistsId;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 public class NovoEnderecoForm implements ClienteDetalhes<Endereco> {
 
@@ -34,7 +36,7 @@ public class NovoEnderecoForm implements ClienteDetalhes<Endereco> {
     @ExistsId(domainClass = Pais.class)
     private final Long idPais;
 
-    @NotNull(message = "{_not_null}")
+    @Nullable
     @JsonProperty("id_estado")
     private final Long idEstado;
 
@@ -80,7 +82,11 @@ public class NovoEnderecoForm implements ClienteDetalhes<Endereco> {
     @Override
     public Endereco mapCliente(Cliente cliente, EntityManager manager) {
         Pais pais = manager.find(Pais.class, idPais);
-        Estado estado = manager.find(Estado.class, idEstado);
+
+        Estado estado = Optional.ofNullable(idEstado)
+                .map(id -> manager.find(Estado.class, id))
+                .orElse(null);
+
         Endereco endereco = new Endereco(this.endereco, this.complemento, this.cep, this.cidade, estado, pais, cliente);
         manager.persist(endereco);
         return endereco;

@@ -1,7 +1,7 @@
 package com.zup.casadocodigo.pais.controller.form;
 
 import com.zup.casadocodigo.pais.modelo.Pais;
-import com.zup.casadocodigo.common.UniqueValue;
+import com.zup.casadocodigo.common.annotations.UniqueValue;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

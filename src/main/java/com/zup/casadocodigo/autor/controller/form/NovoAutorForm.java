@@ -1,6 +1,6 @@
 package com.zup.casadocodigo.autor.controller.form;
 
-import com.zup.casadocodigo.common.UniqueValue;
+import com.zup.casadocodigo.common.annotations.UniqueValue;
 import com.zup.casadocodigo.autor.modelo.Autor;
 
 import javax.validation.constraints.Email;

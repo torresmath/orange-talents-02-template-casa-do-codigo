@@ -1,5 +1,6 @@
-package com.zup.casadocodigo.common;
+package com.zup.casadocodigo.common.validators;
 
+import com.zup.casadocodigo.common.annotations.CPForCNPJ;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 

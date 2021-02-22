@@ -3,8 +3,8 @@ package com.zup.casadocodigo.estado.controller.form;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zup.casadocodigo.estado.modelo.Estado;
 import com.zup.casadocodigo.pais.modelo.Pais;
-import com.zup.casadocodigo.common.ExistsId;
-import com.zup.casadocodigo.common.UniqueValues;
+import com.zup.casadocodigo.common.annotations.ExistsId;
+import com.zup.casadocodigo.common.annotations.UniqueValues;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;

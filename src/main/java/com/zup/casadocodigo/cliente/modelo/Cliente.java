@@ -1,5 +1,7 @@
 package com.zup.casadocodigo.cliente.modelo;
 
+import com.zup.casadocodigo.common.annotations.CPForCNPJ;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,10 +24,16 @@ public class Cliente {
     @NotBlank
     private String email;
 
-    public Cliente(@NotBlank String nome, @NotBlank String sobrenome, @NotBlank String email) {
+    @NotBlank
+    @CPForCNPJ
+    private String documento;
+
+    public Cliente(@NotBlank String nome, @NotBlank String sobrenome, @NotBlank String email, @NotBlank String documento) {
+
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
+        this.documento = documento.replaceAll("[.-]", "");
     }
 
     public Long getId() {

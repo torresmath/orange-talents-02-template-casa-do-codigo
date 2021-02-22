@@ -1,4 +1,6 @@
-package com.zup.casadocodigo.common;
+package com.zup.casadocodigo.common.annotations;
+
+import com.zup.casadocodigo.common.validators.UniqueValueValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -12,6 +14,8 @@ public @interface UniqueValue {
     String message() default "{_duplicated_field}";
     String fieldName();
     Class<?> domainClass();
+    boolean enableRegex() default false;
+    String regex() default "";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 

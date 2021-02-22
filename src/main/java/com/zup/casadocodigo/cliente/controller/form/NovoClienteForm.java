@@ -1,9 +1,10 @@
 package com.zup.casadocodigo.cliente.controller.form;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zup.casadocodigo.cliente.modelo.Cliente;
-import com.zup.casadocodigo.common.UniqueValue;
+import com.zup.casadocodigo.common.annotations.CPForCNPJ;
+import com.zup.casadocodigo.common.annotations.UniqueValue;
 
-import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -24,7 +25,11 @@ public class NovoClienteForm {
     @UniqueValue(domainClass = Cliente.class, fieldName = "email")
     private final String email;
 
-    private final List<ClienteDetalhes> detalhes;
+    @Valid
+    @NotNull(message = "{_not_null}")
+    @CPForCNPJ
+    @UniqueValue(domainClass = Cliente.class, fieldName = "documento", enableRegex = true, regex = "[.-]")
+    private final String documento;
 
     @Valid
     @NotNull(message = "{_not_null}")
@@ -34,17 +39,16 @@ public class NovoClienteForm {
     @NotNull(message = "{_not_null}")
     private final NovoTelefoneForm telefone;
 
-    @Valid
-    @NotNull(message = "{_not_null}")
-    private final NovoDocumentoForm documento;
+    @JsonIgnore
+    private final List<ClienteDetalhes> detalhes;
 
     @Valid
     public NovoClienteForm(@NotBlank(message = "{_not_blank}") String nome,
                            @NotBlank(message = "{_not_blank}") String sobrenome,
                            @NotBlank(message = "{_not_blank}") String email,
+                           @NotBlank(message = "{_not_blank}") String documento,
                            @Valid @NotNull NovoEnderecoForm endereco,
-                           @Valid @NotNull NovoTelefoneForm telefone,
-                           @Valid @NotNull NovoDocumentoForm documento) {
+                           @Valid @NotNull NovoTelefoneForm telefone) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
@@ -52,11 +56,11 @@ public class NovoClienteForm {
         this.telefone = telefone;
         this.documento = documento;
 
-        this.detalhes = Arrays.asList(endereco, telefone, documento);
+        this.detalhes = Arrays.asList(endereco, telefone);
     }
 
     public Cliente toModel() {
-        return new Cliente(nome, sobrenome, email);
+        return new Cliente(nome, sobrenome, email, documento);
     }
 
     public String getNome() {
@@ -79,11 +83,21 @@ public class NovoClienteForm {
         return telefone;
     }
 
-    public NovoDocumentoForm getDocumento() {
+    public @Valid @NotNull(message = "{_not_null}") String getDocumento() {
         return documento;
     }
 
     public List<ClienteDetalhes> getDetalhes() {
         return detalhes;
     }
+
+    @JsonIgnore
+    public Long getIdPais() {
+        return endereco.getIdPais();
+    }
+    @JsonIgnore
+    public Long getIdEstado() {
+        return endereco.getIdEstado();
+    }
+
 }

@@ -1,5 +1,6 @@
-package com.zup.casadocodigo.common;
+package com.zup.casadocodigo.common.validators;
 
+import com.zup.casadocodigo.common.annotations.UniqueValues;
 import org.springframework.beans.BeanWrapperImpl;
 
 import javax.persistence.EntityManager;

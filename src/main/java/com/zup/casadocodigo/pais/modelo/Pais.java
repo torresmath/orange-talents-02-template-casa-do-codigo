@@ -38,4 +38,11 @@ public class Pais {
     public String getNome() {
         return nome;
     }
+
+    public boolean possuiEstados(EntityManager manager) {
+
+        Query query = manager.createQuery("select e from Estado e where e.pais = :pais");
+        query.setParameter("pais", this);
+        return !query.getResultList().isEmpty();
+    }
 }

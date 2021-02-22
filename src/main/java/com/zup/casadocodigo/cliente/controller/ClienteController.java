@@ -2,6 +2,8 @@ package com.zup.casadocodigo.cliente.controller;
 
 import com.zup.casadocodigo.cliente.controller.form.NovoClienteForm;
 import com.zup.casadocodigo.cliente.modelo.Cliente;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -17,6 +19,15 @@ public class ClienteController {
 
     @PersistenceContext
     private EntityManager manager;
+
+    @Autowired
+    private EstadoPertenceAPaisValidator estadoPertenceAPaisValidator;
+
+
+    @InitBinder
+    public void init(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(estadoPertenceAPaisValidator);
+    }
 
     @PostMapping
     @Transactional
